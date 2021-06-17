@@ -1,10 +1,10 @@
 import React from 'react'
-import { MaintContainer } from './components/MainContainer'
+import { MainContainer } from './components/MainContainer'
 import Typography from '@material-ui/core/Typography'
 import { useForm } from "react-hook-form"
 import { Form } from './components/Form'
 import { Input } from './components/Input'
-import { PrimeryButton } from './components/PrimeryButton'
+import { PrimaryButton } from './components/PrimaryButton'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useHistory } from 'react-router-dom'
@@ -32,7 +32,7 @@ export const Step1 = () => {
         console.log(data);
     }
 
-    return <MaintContainer>
+    return <MainContainer>
         <Typography component='h2' variant='h5'>🦄 Step 1</Typography>
         <Form onSubmit={handleSubmit(onSubmit)}>
             <Input
@@ -52,7 +52,7 @@ export const Step1 = () => {
                 error={!!errors.lastName}
                 helperText={errors?.lastName?.message}
             />
-            <PrimeryButton>Next</PrimeryButton>
+            <PrimaryButton>Next</PrimaryButton>
         </Form>
-    </MaintContainer>
+    </MainContainer>
 }
