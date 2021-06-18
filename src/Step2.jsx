@@ -11,6 +11,7 @@ import { PrimaryButton } from './components/PrimaryButton'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
 import parsePhoneNumberFromString from 'libphonenumber-js';
+import { useData } from './DataContext';
 
 const schema = yup.object().shape({
     email: yup.string().email('Email should have correct format').required('Email is a required field')
@@ -25,14 +26,16 @@ const normolizePhoneNumber = (value) => {
 }
 
 export const Step2 = () => {
+    const { data, setValues } = useData()
     const hystory = useHistory()
     const { register, handleSubmit, formState: { errors }, watch } = useForm({
+        defaultValues: { email: data.email, hasPhone: data.hasPhone, phoneNumber: data.phoneNumber },
         mode: 'onBlur',
         resolver: yupResolver(schema)
     })
     const onSubmit = (data) => {
         hystory.push('/step3')
-        console.log('data:' + data);
+        setValues(data)
     }
     const hasPhone = watch("hasPhone")
 
@@ -61,11 +64,10 @@ export const Step2 = () => {
                     name="phoneNumber"
                     onChange={(event) => {
                         event.target.value = normolizePhoneNumber(event.target.value)
-                    }}
-                />
+                    }} />
             )}
 
             <PrimaryButton>Next</PrimaryButton>
         </Form>
-    </MainContainer>
+    </MainContainer >
 }
