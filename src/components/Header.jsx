@@ -16,7 +16,7 @@ const useStyle = makeStyles((theme) => ({
 const Header = () => {
     const style = useStyle()
     return (
-        <Typography className={style.root} component='h1' variant='h5' >The Ultimate Form Challenge</Typography>
+        <Typography className={style.root} component='h1' variant='h5' >The Ultimate Form</Typography>
     )
 
 }

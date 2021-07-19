@@ -29,7 +29,7 @@ export const Step2 = () => {
     const { data, setValues } = useData()
     const hystory = useHistory()
     const { register, handleSubmit, formState: { errors }, watch } = useForm({
-        defaultValues: { email: data.email, hasPhone: data.hasPhone, phoneNumber: data.phoneNumber },
+        defaultValues: { email: data.email, hasPhone: data.hasPhone },
         mode: 'onBlur',
         resolver: yupResolver(schema)
     })
@@ -57,14 +57,15 @@ export const Step2 = () => {
 
             {hasPhone && (
                 <Input
-                    {...register('phoneNumber')}
+                    {...register("phoneNumber")}
                     id="phoneNumber"
                     type="tel"
                     label="Phone Number"
                     name="phoneNumber"
                     onChange={(event) => {
                         event.target.value = normolizePhoneNumber(event.target.value)
-                    }} />
+                    }}
+                />
             )}
 
             <PrimaryButton>Next</PrimaryButton>

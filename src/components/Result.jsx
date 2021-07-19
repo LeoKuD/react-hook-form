@@ -16,6 +16,9 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InsertDriveFile from "@material-ui/icons/InsertDriveFile";
 import { makeStyles } from "@material-ui/core/styles";
+import { PrimaryButton } from './PrimaryButton'
+import Confetti from "react-confetti";
+import Swal from "sweetalert2";
 
 
 const useStyles = makeStyles({
@@ -26,25 +29,38 @@ const useStyles = makeStyles({
         marginBottom: "30px",
     },
 });
+
+
 export const Result = () => {
-    const { data } = useData();
+
     const styles = useStyles();
-    const entries = Object.entries(data).filter((entry) => entry[0] !== "files");
+    const { data } = useData();
+
+    const entries = Object.entries(data).filter((entry) => entry[0] !== "files")
     const { files } = data;
+    const [success, setSuccess] = useState(false)
+
+    const onSubmit = () => {
+        Swal.fire("Great job!", "You've passed the challenge!", "success");
+        setSuccess(true);
+    }
+
+    if (success) {
+        return <Confetti />
+    }
+
     return (
         <>
             <MainContainer>
-                <Typography component='h2' variant='h5'> 📋 Form Values</Typography>
+                <Typography component="h2" variant="h5">
+                    📋 Form Values
+                </Typography>
                 <TableContainer className={styles.root} component={Paper}>
                     <Table className={styles.table} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>
-                                    File
-                                </TableCell>
-                                <TableCell align='right'>
-                                    Value
-                                </TableCell>
+                                <TableCell>Field</TableCell>
+                                <TableCell align="right">Value</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -76,8 +92,9 @@ export const Result = () => {
                         </List>
                     </>
                 )}
-                <Link to='/'>Star Over</Link>
+                <PrimaryButton onClick={onSubmit}>Submit</PrimaryButton>
+                <Link to="/">Start over</Link>
             </MainContainer>
         </>
-    )
+    );
 }
